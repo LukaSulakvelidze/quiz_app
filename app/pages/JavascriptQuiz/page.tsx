@@ -18,19 +18,12 @@ import QuestionCont from "@/app/components/_molecules/QuestionCont";
 import { RiJavascriptLine } from "react-icons/ri";
 
 const CssQuiz = () => {
-  const filteredData = quizJSONData.filter((cat) => cat.category === "HTML");
+  const filteredData = quizJSONData.filter(
+    (cat) => cat.category === "Javascript"
+  );
 
-  const [index, setIndex] = useState(() => {
-    const storedIndex = localStorage.getItem("index");
-    return storedIndex ? parseInt(storedIndex) : 0;
-  });
-
-  const [question, setQuestion] = useState<quizData>(() => {
-    const storedIndex = localStorage.getItem("index");
-    const startIndex = storedIndex ? parseInt(storedIndex) : 0;
-    return filteredData[startIndex];
-  });
-
+  const [index, setIndex] = useState(0);
+  const [question, setQuestion] = useState<quizData>(filteredData[0]);
   const [optionChecked, setOptionChecked] = useState(0);
   const [result, setResult] = useState<boolean>();
   const [lock, setLock] = useState(false);
@@ -39,10 +32,19 @@ const CssQuiz = () => {
   const [score, setScore] = useState<number>(0);
 
   useEffect(() => {
-    const scoreFromLocal = localStorage.getItem("score");
+    if (typeof window !== "undefined") {
+      const storedIndex = localStorage.getItem("index");
+      const storedScore = localStorage.getItem("score");
 
-    if (scoreFromLocal) {
-      setScore(parseInt(scoreFromLocal));
+      if (storedIndex) {
+        const parsedIndex = parseInt(storedIndex);
+        setIndex(parsedIndex);
+        setQuestion(filteredData[parsedIndex]);
+      }
+
+      if (storedScore) {
+        setScore(parseInt(storedScore));
+      }
     }
   }, []);
 
