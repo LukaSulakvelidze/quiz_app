@@ -1,0 +1,182 @@
+[
+  {
+    "category": "HTML",
+    "question": "Which tag is used to create a hyperlink in HTML?",
+    "option1": "<a>",
+    "option2": "<link>",
+    "option3": "<href>",
+    "option4": "<url>",
+    "correct": 1
+  },
+  {
+    "category": "HTML",
+    "question": "What is the correct HTML element for inserting a line break?",
+    "option1": "<break>",
+    "option2": "<lb>",
+    "option3": "<br>",
+    "option4": "<line>",
+    "correct": 3
+  },
+  {
+    "category": "HTML",
+    "question": "Which of these is a self-closing tag in HTML?",
+    "option1": "<div>",
+    "option2": "<img>",
+    "option3": "<p>",
+    "option4": "<h1>",
+    "correct": 2
+  },
+  {
+    "category": "HTML",
+    "question": "What does the <em><code>&lt;meta&gt;</code></em> tag typically contain?",
+    "option1": "Author and page description",
+    "option2": "JavaScript code",
+    "option3": "HTML structure",
+    "option4": "Page content",
+    "correct": 1
+  },
+  {
+    "category": "HTML",
+    "question": "What is the correct doctype for HTML5?",
+    "option1": "<!DOCTYPE html5>",
+    "option2": "<!DOCTYPE HTML PUBLIC>",
+    "option3": "<html>",
+    "option4": "<!DOCTYPE html>",
+    "correct": 4
+  },
+  {
+    "category": "CSS",
+    "question": "Which CSS property is used to change the text color of an element?",
+    "option1": "font-color",
+    "option2": "color",
+    "option3": "text-color",
+    "option4": "background-color",
+    "correct": 2
+  },
+  {
+    "category": "CSS",
+    "question": "How do you make the text bold in CSS?",
+    "option1": "font-weight: bold;",
+    "option2": "font-bold: true;",
+    "option3": "text-weight: bold;",
+    "option4": "font-size: bold;",
+    "correct": 1
+  },
+  {
+    "category": "CSS",
+    "question": "Which property is used to change the background color in CSS?",
+    "option1": "bg-color",
+    "option2": "background-color",
+    "option3": "color-background",
+    "option4": "background",
+    "correct": 2
+  },
+  {
+    "category": "CSS",
+    "question": "How can you center a block element horizontally using CSS?",
+    "option1": "margin: 0 auto;",
+    "option2": "text-align: center;",
+    "option3": "padding: 0 auto;",
+    "option4": "float: center;",
+    "correct": 1
+  },
+  {
+    "category": "CSS",
+    "question": "Which CSS property controls the layout's z-index?",
+    "option1": "position",
+    "option2": "display",
+    "option3": "z-index",
+    "option4": "order",
+    "correct": 3
+  },
+  {
+    "category": "Javascript",
+    "question": "Which method is used to select an element by its ID in JavaScript?",
+    "option1": "document.getElementById()",
+    "option2": "document.querySelector()",
+    "option3": "document.getElementByClass()",
+    "option4": "document.getElement()",
+    "correct": 1
+  },
+  {
+    "category": "Javascript",
+    "question": "Which of the following is a JavaScript array?",
+    "option1": "{name: 'John', age: 30}",
+    "option2": "[1, 2, 3, 4]",
+    "option3": "(1, 2, 3, 4)",
+    "option4": "1, 2, 3, 4",
+    "correct": 2
+  },
+  {
+    "category": "Javascript",
+    "question": "How can you add a comment in JavaScript?",
+    "option1": "// This is a comment",
+    "option2": "<!-- This is a comment -->",
+    "option3": "** This is a comment",
+    "option4": "/* This is a comment */",
+    "correct": 1
+  },
+  {
+    "category": "Javascript",
+    "question": "What does the <code>typeof</code> operator return?",
+    "option1": "The type of a variable",
+    "option2": "The value of a variable",
+    "option3": "The size of a variable",
+    "option4": "The length of a string",
+    "correct": 1
+  },
+  {
+    "category": "Javascript",
+    "question": "How do you call a function in JavaScript?",
+    "option1": "call myFunction()",
+    "option2": "myFunction()",
+    "option3": "call function myFunction()",
+    "option4": "run myFunction()",
+    "correct": 2
+  },
+  {
+    "category": "Accessibility",
+    "question": "Which tag is used to define keyboard shortcuts for accessibility?",
+    "option1": "<kbd>",
+    "option2": "<key>",
+    "option3": "<shortcut>",
+    "option4": "<accesskey>",
+    "correct": 4
+  },
+  {
+    "category": "Accessibility",
+    "question": "What does WCAG stand for in web accessibility?",
+    "option1": "Web Content Accessibility Group",
+    "option2": "Web Compliance Accessibility Guidelines",
+    "option3": "Web Content Accessibility Guidelines",
+    "option4": "Web Content and Accessibility Guidelines",
+    "correct": 3
+  },
+  {
+    "category": "Accessibility",
+    "question": "Which of these attributes helps improve accessibility?",
+    "option1": "name",
+    "option2": "title",
+    "option3": "aria-label",
+    "option4": "id",
+    "correct": 3
+  },
+  {
+    "category": "Accessibility",
+    "question": "Which HTML tag is used to define the structure of a web page for screen readers?",
+    "option1": "<article>",
+    "option2": "<section>",
+    "option3": "<nav>",
+    "option4": "<header>",
+    "correct": 2
+  },
+  {
+    "category": "Accessibility",
+    "question": "How can you make images accessible for visually impaired users?",
+    "option1": "By adding descriptive captions",
+    "option2": "By using high-resolution images",
+    "option3": "By adding 'alt' text",
+    "option4": "By increasing image size",
+    "correct": 3
+  }
+]
