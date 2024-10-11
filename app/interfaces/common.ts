@@ -45,9 +45,11 @@ export interface QuestionCont_props {
 export type quizData = {
   category: string;
   question: string;
-  option1: string;
-  option2: string;
-  option3: string;
-  option4: string;
+  answers: {
+    A: string;
+    B: string;
+    C: string;
+    D: string;
+  };
   correct: number;
 };

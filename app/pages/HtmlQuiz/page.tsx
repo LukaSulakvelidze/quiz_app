@@ -1,6 +1,6 @@
 "use client";
 import Layout from "@/app/layouts/Layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoCodeSlashOutline } from "react-icons/io5";
 import { CiCircleRemove } from "react-icons/ci";
 import quizJSONData from "../../services/quizData/quizData.json";
@@ -12,6 +12,7 @@ import ResultScore from "@/app/components/_molecules/ResultScore";
 import {
   checkAnswer,
   colorCheck,
+  letterToIndex,
   nextQuestion,
 } from "@/app/services/commonFunc";
 import QuestionCont from "@/app/components/_molecules/QuestionCont";
@@ -19,14 +20,31 @@ import QuestionCont from "@/app/components/_molecules/QuestionCont";
 const HtmlQuiz = () => {
   const filteredData = quizJSONData.filter((cat) => cat.category === "HTML");
 
-  const [index, setIndex] = useState(0);
-  const [question, setQuestion] = useState<quizData>(filteredData[index]);
+  const [index, setIndex] = useState(() => {
+    const storedIndex = localStorage.getItem("index");
+    return storedIndex ? parseInt(storedIndex) : 0;
+  });
+
+  const [question, setQuestion] = useState<quizData>(() => {
+    const storedIndex = localStorage.getItem("index");
+    const startIndex = storedIndex ? parseInt(storedIndex) : 0;
+    return filteredData[startIndex];
+  });
+
   const [optionChecked, setOptionChecked] = useState(0);
   const [result, setResult] = useState<boolean>();
   const [lock, setLock] = useState(false);
   const [finalResult, setFinalResul] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState<number>(0);
+
+  useEffect(() => {
+    const scoreFromLocal = localStorage.getItem("score");
+
+    if (scoreFromLocal) {
+      setScore(parseInt(scoreFromLocal));
+    }
+  }, []);
 
   return (
     <Layout
@@ -43,142 +61,71 @@ const HtmlQuiz = () => {
               question={question}
             />
             <div className="flex flex-col gap-3 tab:gap-6 w-full des:w-[564px]">
-              <OptionCont
-                onClick={() => {
-                  if (!lock) {
-                    setOptionChecked(1);
-                  }
-                }}
-                buttonStyle={{
-                  border: `${
-                    colorCheck(result, optionChecked, question, 1) &&
-                    "3px solid " +
-                      colorCheck(result, optionChecked, question, 1)
-                  }`,
-                }}
-                option={question.option1}
-                bgColor={`${
-                  colorCheck(result, optionChecked, question, 1) === ""
-                    ? "#F4F6FA"
-                    : colorCheck(result, optionChecked, question, 1)
-                }`}
-                icon={
-                  <span
-                    className="font-[rubik] text-[18px] tab:text-[28px] font-medium leading-[18px] tab:leading-[28px]"
-                    style={{
-                      color: `${
-                        colorCheck(result, optionChecked, question, 1)
-                          ? "white"
-                          : "#626C7F"
+              {Object.entries(question.answers).map(([index, value]) => {
+                const optionIndex = letterToIndex(index);
+                return (
+                  <OptionCont
+                    key={index}
+                    onClick={() => {
+                      if (!lock) {
+                        setOptionChecked(optionIndex);
+                      }
+                    }}
+                    buttonStyle={{
+                      border: `${
+                        colorCheck(
+                          result,
+                          optionChecked,
+                          question,
+                          optionIndex
+                        ) &&
+                        "3px solid " +
+                          colorCheck(
+                            result,
+                            optionChecked,
+                            question,
+                            optionIndex
+                          )
                       }`,
                     }}
-                  >
-                    A
-                  </span>
-                }
-              />
-              <OptionCont
-                onClick={() => {
-                  if (!lock) {
-                    setOptionChecked(2);
-                  }
-                }}
-                buttonStyle={{
-                  border: `${
-                    colorCheck(result, optionChecked, question, 2) &&
-                    "3px solid " +
-                      colorCheck(result, optionChecked, question, 2)
-                  }`,
-                }}
-                option={question.option2}
-                bgColor={`${
-                  colorCheck(result, optionChecked, question, 2) === ""
-                    ? "#F4F6FA"
-                    : colorCheck(result, optionChecked, question, 2)
-                }`}
-                icon={
-                  <span
-                    className="font-[rubik] text-[18px] tab:text-[28px] font-medium leading-[18px] tab:leading-[28px]"
-                    style={{
-                      color: `${
-                        colorCheck(result, optionChecked, question, 2)
-                          ? "white"
-                          : "#626C7F"
-                      }`,
-                    }}
-                  >
-                    B
-                  </span>
-                }
-              />
-              <OptionCont
-                onClick={() => {
-                  if (!lock) {
-                    setOptionChecked(3);
-                  }
-                }}
-                buttonStyle={{
-                  border: `${
-                    colorCheck(result, optionChecked, question, 3) &&
-                    "3px solid " +
-                      colorCheck(result, optionChecked, question, 3)
-                  }`,
-                }}
-                option={question.option3}
-                bgColor={`${
-                  colorCheck(result, optionChecked, question, 3) === ""
-                    ? "#F4F6FA"
-                    : colorCheck(result, optionChecked, question, 3)
-                }`}
-                icon={
-                  <span
-                    className="font-[rubik] text-[18px] tab:text-[28px] font-medium leading-[18px] tab:leading-[28px]"
-                    style={{
-                      color: `${
-                        colorCheck(result, optionChecked, question, 3)
-                          ? "white"
-                          : "#626C7F"
-                      }`,
-                    }}
-                  >
-                    C
-                  </span>
-                }
-              />
-              <OptionCont
-                onClick={() => {
-                  if (!lock) {
-                    setOptionChecked(4);
-                  }
-                }}
-                buttonStyle={{
-                  border: `${
-                    colorCheck(result, optionChecked, question, 4) &&
-                    "3px solid " +
-                      colorCheck(result, optionChecked, question, 4)
-                  }`,
-                }}
-                option={question.option4}
-                bgColor={`${
-                  colorCheck(result, optionChecked, question, 4) === ""
-                    ? "#F4F6FA"
-                    : colorCheck(result, optionChecked, question, 4)
-                }`}
-                icon={
-                  <span
-                    className="font-[rubik] text-[18px] tab:text-[28px] font-medium leading-[18px] tab:leading-[28px]"
-                    style={{
-                      color: `${
-                        colorCheck(result, optionChecked, question, 4)
-                          ? "white"
-                          : "#626C7F"
-                      }`,
-                    }}
-                  >
-                    D
-                  </span>
-                }
-              />
+                    option={value}
+                    bgColor={`${
+                      colorCheck(
+                        result,
+                        optionChecked,
+                        question,
+                        optionIndex
+                      ) === ""
+                        ? "#F4F6FA"
+                        : colorCheck(
+                            result,
+                            optionChecked,
+                            question,
+                            optionIndex
+                          )
+                    }`}
+                    icon={
+                      <span
+                        className="font-[rubik] text-[18px] tab:text-[28px] font-medium leading-[18px] tab:leading-[28px]"
+                        style={{
+                          color: `${
+                            colorCheck(
+                              result,
+                              optionChecked,
+                              question,
+                              optionIndex
+                            )
+                              ? "white"
+                              : "#626C7F"
+                          }`,
+                        }}
+                      >
+                        {index}
+                      </span>
+                    }
+                  />
+                );
+              })}
 
               {lock ? (
                 <Button

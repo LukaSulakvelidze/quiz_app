@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../_atoms/Button";
 import { ResultScore_props } from "@/app/interfaces/common";
 import Link from "next/link";
+import { resetButton } from "@/app/services/commonFunc";
 
 const ResultScore = ({
   icon,
@@ -38,6 +39,7 @@ const ResultScore = ({
             className={
               "flex items-center justify-center w-full rounded-xl p-[19px] font-[rubik] text-[18px] tab:text-[28px] font-medium leading-[18px] tab:leading-[28px] hover:opacity-50 text-white bg-[#A729F5]"
             }
+            onClick={resetButton}
           >
             Play Again
           </Button>

@@ -1,24 +1,28 @@
 import { quizData } from "../interfaces/common";
 
-const nextQuestion = (
-  index: number,
-  filteredData: quizData[],
-  setFinalResul: React.Dispatch<React.SetStateAction<boolean>>,
-  setIndex: React.Dispatch<React.SetStateAction<number>>,
-  setQuestion: React.Dispatch<React.SetStateAction<quizData>>,
-  setResult: React.Dispatch<React.SetStateAction<boolean | undefined>>,
+const checkAnswer = (
+  optionChecked: number,
   setLock: React.Dispatch<React.SetStateAction<boolean>>,
-  setOptionChecked: React.Dispatch<React.SetStateAction<number>>
+  setErrorMessage: React.Dispatch<React.SetStateAction<boolean>>,
+  setResult: React.Dispatch<React.SetStateAction<boolean | undefined>>,
+  question: quizData,
+  setScore: React.Dispatch<React.SetStateAction<number>>,
+  score: number
 ) => {
-  if (index === filteredData.length - 1) {
-    setFinalResul(true);
-    return;
+  if (optionChecked) {
+    setLock(true);
+    setErrorMessage(false);
+    if (question.correct === optionChecked) {
+      setResult(true);
+      const updatedScore = score + 1;
+      setScore(updatedScore);
+      localStorage.setItem("score", updatedScore.toString());
+    } else {
+      setResult(false);
+    }
+  } else {
+    setErrorMessage(true);
   }
-  setIndex(index + 1);
-  setQuestion(filteredData[index + 1]);
-  setResult(undefined);
-  setLock(false);
-  setOptionChecked(0);
 };
 
 const colorCheck = (
@@ -40,26 +44,36 @@ const colorCheck = (
   }
 };
 
-const checkAnswer = (
-  optionChecked: number,
-  setLock: React.Dispatch<React.SetStateAction<boolean>>,
-  setErrorMessage: React.Dispatch<React.SetStateAction<boolean>>,
+const nextQuestion = (
+  index: number,
+  filteredData: quizData[],
+  setFinalResul: React.Dispatch<React.SetStateAction<boolean>>,
+  setIndex: React.Dispatch<React.SetStateAction<number>>,
+  setQuestion: React.Dispatch<React.SetStateAction<quizData>>,
   setResult: React.Dispatch<React.SetStateAction<boolean | undefined>>,
-  question: quizData,
-  setScore: React.Dispatch<React.SetStateAction<number>>,
-  score: number
+  setLock: React.Dispatch<React.SetStateAction<boolean>>,
+  setOptionChecked: React.Dispatch<React.SetStateAction<number>>
 ) => {
-  if (optionChecked) {
-    setLock(true);
-    setErrorMessage(false);
-    if (question.correct === optionChecked) {
-      setResult(true);
-      setScore(score + 1);
-    } else {
-      setResult(false);
-    }
-  } else {
-    setErrorMessage(true);
+  if (index === filteredData.length - 1) {
+    setFinalResul(true);
+    return;
   }
+  const updatedIndex = index + 1;
+  setIndex(updatedIndex);
+  localStorage.setItem("index", updatedIndex.toString());
+  setQuestion(filteredData[updatedIndex]);
+  setResult(undefined);
+  setLock(false);
+  setOptionChecked(0);
 };
-export { nextQuestion, colorCheck, checkAnswer };
+
+const resetButton = () => {
+  localStorage.removeItem("index");
+  localStorage.removeItem("score");
+};
+
+const letterToIndex = (key: string): number => {
+  const map: { [key: string]: number } = { A: 1, B: 2, C: 3, D: 4 };
+  return map[key];
+};
+export { nextQuestion, colorCheck, checkAnswer, letterToIndex, resetButton };
