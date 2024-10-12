@@ -17,7 +17,7 @@ import {
 import QuestionCont from "@/app/components/_molecules/QuestionCont";
 import { RiJavascriptLine } from "react-icons/ri";
 
-const CssQuiz = () => {
+const JavascriptQuiz = () => {
   const filteredData = quizJSONData.filter(
     (cat) => cat.category === "Javascript"
   );
@@ -195,4 +195,4 @@ const CssQuiz = () => {
   );
 };
 
-export default CssQuiz;
+export default JavascriptQuiz;

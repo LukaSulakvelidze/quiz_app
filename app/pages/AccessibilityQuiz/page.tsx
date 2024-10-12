@@ -17,8 +17,10 @@ import {
 import QuestionCont from "@/app/components/_molecules/QuestionCont";
 import { IoAccessibilityOutline } from "react-icons/io5";
 
-const CssQuiz = () => {
-  const filteredData = quizJSONData.filter((cat) => cat.category === "Accessibility");
+const AccessibilityQuiz = () => {
+  const filteredData = quizJSONData.filter(
+    (cat) => cat.category === "Accessibility"
+  );
 
   const [index, setIndex] = useState(0);
   const [question, setQuestion] = useState<quizData>(filteredData[0]);
@@ -195,4 +197,4 @@ const CssQuiz = () => {
   );
 };
 
-export default CssQuiz;
+export default AccessibilityQuiz;
